@@ -8,6 +8,7 @@ function Menu(props) {
     return (
       <ListItem
         key={index}
+        onPress={() => props.onPress(item.id)}
         title={item.name}
         subtitle={item.description}
         hideChevron={true}
