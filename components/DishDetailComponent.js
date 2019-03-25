@@ -6,23 +6,23 @@ import { Card, Icon } from 'react-native-elements';
 
 function RenderComments(props) {
   const comments = props.comments;
-  const renderCommentItem = ({item, index}) => {
-      return (
-          <View key={index} style={{margin: 10}}>
-              <Text style={{fontSize: 14}}>{item.comment}</Text>
-              <Text style={{fontSize: 12}}>{item.rating} Stars</Text>
-              <Text style={{fontSize: 12}}>{'-- ' + item.author + ', ' + item.date} </Text>
-          </View>
-      );
+  const renderCommentItem = ({ item, index }) => {
+    return (
+      <View key={index} style={{ margin: 10 }}>
+        <Text style={{ fontSize: 14 }}>{item.comment}</Text>
+        <Text style={{ fontSize: 12 }}>{item.rating} Stars</Text>
+        <Text style={{ fontSize: 12 }}>{'-- ' + item.author + ', ' + item.date} </Text>
+      </View>
+    );
   };
   return (
-      <Card title='Comments' >
-        <FlatList 
-          data={comments}
-          renderItem={renderCommentItem}
-          keyExtractor={item => item.id.toString()}
-          />
-      </Card>
+    <Card title='Comments' >
+      <FlatList
+        data={comments}
+        renderItem={renderCommentItem}
+        keyExtractor={item => item.id.toString()}
+      />
+    </Card>
   );
 }
 
@@ -40,10 +40,10 @@ function RenderDish(props) {
         <Icon
           raised
           reverse
-          name={ props.favorite ? 'heart' : 'heart-o'}
+          name={props.favorite ? 'heart' : 'heart-o'}
           type='font-awesome'
           color='#f50'
-          onPress={() => props.favorite ? alert('Already favorite') : props.onPress()}
+          onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()}
         />
       </Card>
     )
@@ -59,25 +59,25 @@ class DishDetailComponent extends React.Component {
     dishes: DISHES,
     comments: COMMENTS,
     favorites: []
-};
+  };
 
   static navigationOptions = {
     title: 'Dish Details'
   }
 
   markFavorite(dishId) {
-    this.setState({favorites: this.state.favorites.concat(dishId)});
-}
+    this.setState({ favorites: this.state.favorites.concat(dishId) });
+  }
 
   render() {
     const dishId = this.props.navigation.getParam('dishId', '');
     return (
       <ScrollView>
-        <RenderDish 
+        <RenderDish
           dish={this.state.dishes[+dishId]}
           favorite={this.state.favorites.some(i => i === dishId)}
-          onPress={() => this.markFavorite(dishId)} 
-        />        
+          onPress={() => this.markFavorite(dishId)}
+        />
         <RenderComments comments={this.state.comments.filter((comment) => comment.dishId === dishId)} />
       </ScrollView>
     )
