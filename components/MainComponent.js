@@ -5,6 +5,7 @@ import Menu from './MenuComponent';
 import Home from './HomeComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
+import Favorites from './FavoriteComponent';
 import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -29,6 +30,22 @@ const CustomDrawerContentComponent = (props) => (
   </ScrollView>
 );
 
+const FavoriteNavigator = createStackNavigator({
+  Favorites: { screen: Favorites }
+}, {
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        paddingLeft: 10,
+        backgroundColor: "#512DA8"
+      },
+      headerTitleStyle: {
+        color: "#fff"
+      },
+      headerTintColor: "#fff",
+      headerLeft: <Icon name='menu' size={24} color='white' onPress={() => navigation.toggleDrawer()} />
+
+    })
+  })
 
 const ReservationNavigator = createStackNavigator({
   Reservation: { screen: Reservation }
@@ -167,6 +184,21 @@ const MainNavigator = createDrawerNavigator({
       drawerIcon: ({ tintColor, focused }) => (
         <Icon
           name='cutlery'
+          type='font-awesome'
+          size={24}
+          iconStyle={{ color: tintColor }}
+        />
+      ),
+    }
+  }, Favorites:
+  {
+    screen: FavoriteNavigator,
+    navigationOptions: {
+      title: 'My Favorites',
+      drawerLabel: 'My Favorites',
+      drawerIcon: ({ tintColor, focused }) => (
+        <Icon
+          name='heart'
           type='font-awesome'
           size={24}
           iconStyle={{ color: tintColor }}
