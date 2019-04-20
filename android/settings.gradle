@@ -1,4 +1,6 @@
 rootProject.name = 'courseraNative'
+include ':react-native-image-crop-picker'
+project(':react-native-image-crop-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-crop-picker/android')
 include ':react-native-mail-compose'
 project(':react-native-mail-compose').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-mail-compose/android')
 include ':react-native-vector-icons'
