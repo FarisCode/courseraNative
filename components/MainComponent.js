@@ -31,22 +31,22 @@ const CustomDrawerContentComponent = (props) => (
 );
 
 const LoginNavigator = createStackNavigator({
-  Login: { screen: Login }
+  Login: Login
 }, {
     navigationOptions: ({ navigation }) => ({
       headerStyle: {
-        paddingLeft: 10,
         backgroundColor: "#512DA8"
       },
       headerTitleStyle: {
         color: "#fff"
       },
+      title: 'Credentials',
       headerTintColor: "#fff",
-      headerLeft: <Icon name='menu' size={24} color='white' onPress={() => navigation.toggleDrawer()} />
-
+      headerLeft: <Icon name="menu" size={24}
+        iconStyle={{ color: 'white' }}
+        onPress={() => navigation.toggleDrawer()} />
     })
-  }
-);
+  });
 
 const FavoriteNavigator = createStackNavigator({
   Favorites: { screen: Favorites }
